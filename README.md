@@ -1,3 +1,6 @@
 # loki_0_0.5
 
-# todo: add author summary here from paper
+# todo: 
+* add author summary here from paper
+* specify dependencies (pupil_parse)
+* rename with paper title (or include)
