@@ -479,6 +479,8 @@ all_models_posterior_prob_df$model_reordered <- factor(all_models_posterior_prob
 # all_models_posterior_prob_df to csv
 write.csv(all_models_posterior_prob_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/pc_postprob_each_m.csv'),row.names=FALSE)
 
+
+
 ggplot(all_models_posterior_prob_df, aes(model, posterior_prob, fill=subj_id)) + geom_bar( position = "dodge", stat = "identity") + 
   ylab('p(M|D)') +   geom_hline(yintercept=c(0.50, 0.75, 0.95, 0.99), color='darkgray', linetype="dashed")  + theme_minimal(base_size = 16) + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
@@ -496,7 +498,7 @@ ggsave(paste0(fig_dir, 'sub_pc_models_postprob.png'))
 
 
 
-ggplot(all_models_posterior_prob_df, aes(model, posterior_prob)) + geom_bar(stat = "summary", fun.y = "mean") + 
+ggplot(all_models_posterior_prob_df, aes(model, posterior_prob)) + geom_bar(stat = "summary", fun = mean) + 
   stat_summary(fun.data=mean_cl_boot, geom="errorbar",position=position_dodge(width=0.85), width=0.1, fun.args=list(conf.int=.95)) +
   ylab('p(M|D)') +   geom_hline(yintercept=c(0.50, 0.75, 0.95, 0.99), color='darkgray', linetype="dashed")  + theme_minimal(base_size = 16) + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
