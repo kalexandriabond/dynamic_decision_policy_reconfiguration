@@ -292,13 +292,6 @@ stringsAsFactors=FALSE)
 
 cond_alt_v_null_df$comparison <- as.factor(cond_alt_v_null_df$comparison)
 
-cond_alt_v_null_df$comparison_reordered <- factor(cond_alt_v_null_df$comparison, levels=c("theta_radians_z ~ epoch_trial : theta_radians_z ~ 1",
-                                                                                     "theta_radians_z ~ epoch_trial + lambda_val + p_optimal : theta_radians_z ~ 1",
-                                                                                     "theta_radians_z ~ epoch_trial + lambda_val + lambda_val * epoch_trial : theta_radians_z ~ 1",
-                                                                                     "theta_radians_z ~ epoch_trial + p_optimal + p_optimal * epoch_trial : theta_radians_z ~ 1",
-                                                                                     "theta_radians_z ~ epoch_trial + lambda_val + p_optimal + lambda_val * epoch_trial + p_optimal * epoch_trial : theta_radians_z ~ 1",
-                                                                                     "theta_radians_z ~ epoch_trial + p_optimal + lambda_val + p_optimal * lambda_val * epoch_trial : theta_radians_z ~ 1"))
-
 cond_alt_v_null_df$subj_id <- as.factor(cond_alt_v_null_df$subj_id)
 cond_alt_v_null_df$subj_id_anon <- recode_factor(cond_alt_v_null_df$subj_id, `786` = 1, `787` = 2, `788` = 3, '789' = 4)
 
@@ -337,22 +330,15 @@ bic_df$subj_id_anon <- recode_factor(bic_df$subj_id, `786` = 1, `787` = 2, `788`
 
 bic_df$model <- as.factor(bic_df$model)
 
-bic_df$model_reordered <- factor(bic_df$model, levels=c("abs_null_m", 
-                                                        "time_null_m",
-                                                        "conditional_m",
-                                                        "conditional_time_m",
-                                                        "conflict_time_m",
-                                                        "vol_time_m",
-                                                        "vol_conflict_time_m"
-                                                        ))
-
-
                                                                           
 # bic_df to csv
 write.csv(bic_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/conditional_bic_df.csv'),row.names=FALSE)
+write.csv(bic_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/conditional_bic_df.csv'),row.names=FALSE)
+
 
 # cond_alt_v_null_df to csv 
 write.csv(cond_alt_v_null_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/conditional_BF_df.csv'), row.names=FALSE)
+write.csv(cond_alt_v_null_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/conditional_BF_df.csv'),row.names=FALSE)
 
 
 calc_posterior_prob_mult_h <- function(source_model_prior_pred_prob, all_models_prior_pred_prob){
@@ -428,6 +414,7 @@ posterior_prob_abs_null_df <- data.frame(posterior_prob_abs_null=matrix(unlist(p
 
 # posterior_prob_null_df to csv
 write.csv(posterior_prob_abs_null_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/cond_postprob_abs_null_m.csv'),row.names=FALSE)
+write.csv(posterior_prob_abs_null_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/cond_postprob_abs_null_m.csv'),row.names=FALSE)
 
 
 
@@ -461,6 +448,7 @@ posterior_prob_time_null_df <- data.frame(posterior_prob_time_null=matrix(unlist
 
 # posterior_prob_null_df to csv
 write.csv(posterior_prob_time_null_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/cond_postprob_time_null_m.csv'),row.names=FALSE)
+write.csv(posterior_prob_time_null_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/cond_postprob_time_null_m.csv'),row.names=FALSE)
 
 
 # ~ comparing all models against the time null 
@@ -528,16 +516,12 @@ cond_alt_v_time_null_df <- data.frame(BF=matrix(unlist(BFs), nrow=24, byrow=T),
 
 cond_alt_v_time_null_df$comparison <- as.factor(cond_alt_v_time_null_df$comparison)
 
-cond_alt_v_time_null_df$comparison_reordered <- factor(cond_alt_v_time_null_df$comparison, levels=c("theta_radians_z ~ epoch_trial + lambda_val + p_optimal : theta_radians_z ~ epoch_trial",
-                                                                                                    "theta_radians_z ~ epoch_trial + lambda_val + p_optimal + lambda_val * epoch_trial + p_optimal * epoch_trial : theta_radians_z ~ epoch_trial",
-                                                                                                    "theta_radians_z ~ epoch_trial + p_optimal + lambda_val + p_optimal * lambda_val * epoch_trial : theta_radians_z ~ epoch_trial"  ))
-                             
-
 cond_alt_v_time_null_df$subj_id <- as.factor(cond_alt_v_time_null_df$subj_id)
 cond_alt_v_time_null_df$subj_id_anon <- recode_factor(cond_alt_v_time_null_df$subj_id, `786` = 1, `787` = 2, `788` = 3, '789' = 4)
 
 # cond_alt_v_null_df to csv 
 write.csv(cond_alt_v_time_null_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/conditional_timenull_BF_df.csv'), row.names=FALSE)
+write.csv(cond_alt_v_time_null_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/conditional_timenull_BF_df.csv'),row.names=FALSE)
 
 # --- #
 
@@ -580,14 +564,8 @@ all_models_posterior_prob_df <- data.frame(posterior_prob=matrix(unlist(posterio
 
 fig_dir <- paste0(home, 'Dropbox/loki_0.5/figures/model_comparisons/')
 
-all_models_posterior_prob_df$model_reordered <- factor(all_models_posterior_prob_df$model, levels=c("abs_null_m", 
-                                                                                                    "time_null_m",
-                                                                                                    "conditional_m",
-                                                                                                    "conflict_time_m",
-                                                                                                    "vol_time_m",
-                                                                                                    "conditional_time_m",
-                                                                                                    "vol_conflict_time_m"))
 
 # all_models_posterior_prob_df to csv
 write.csv(all_models_posterior_prob_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/cond_postprob_each_m.csv'),row.names=FALSE)
+write.csv(all_models_posterior_prob_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/cond_postprob_each_m.csv'),row.names=FALSE)
 

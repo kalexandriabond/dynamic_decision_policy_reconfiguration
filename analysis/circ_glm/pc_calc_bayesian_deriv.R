@@ -290,12 +290,6 @@ stringsAsFactors=FALSE)
 
 pc_alt_v_null_df$comparison <- as.factor(pc_alt_v_null_df$comparison)
 
-pc_alt_v_null_df$comparison_reordered <- factor(pc_alt_v_null_df$comparison, levels=c("theta_radians_z ~ epoch_trial + projection_0_shifted + projection_1_shifted : theta_radians_z ~ epoch_trial",
-                                                                                      "theta_radians_z ~ epoch_trial + projection_0_shifted + epoch_trial * projection_0_shifted : theta_radians_z ~ epoch_trial",
-                                                                                      "theta_radians_z ~ epoch_trial + projection_1_shifted + epoch_trial * projection_1_shifted : theta_radians_z ~ epoch_trial",
-                                                                                      "theta_radians_z ~ epoch_trial + projection_0_shifted + projection_1_shifted + epoch_trial * projection_0_shifted + epoch_trial * projection_1_shifted : theta_radians_z ~ epoch_trial",
-                                                                                      "theta_radians_z ~ epoch_trial + projection_0_shifted + projection_1_shifted + projection_0_shifted * projection_1_shifted * epoch_trial : theta_radians_z ~ epoch_trial"))
-
 pc_alt_v_null_df$subj_id <- as.factor(pc_alt_v_null_df$subj_id)
 pc_alt_v_null_df$subj_id_anon <- recode_factor(pc_alt_v_null_df$subj_id, `786` = 1, `787` = 2, `788` = 3, '789' = 4)
 
@@ -336,20 +330,15 @@ bic_df$subj_id_anon <- recode_factor(bic_df$subj_id, `786` = 1, `787` = 2, `788`
 
 bic_df$model <- as.factor(bic_df$model)
 
-bic_df$model_reordered <- factor(bic_df$model, levels=c("null_m", 
-                                                        "null_pc_interaction_m",
-                                                        "pc0_time_interaction_m", 
-                                                        "pc1_time_interaction_m", 
-                                                        "pc0time_pc1time_interaction_m",
-                                                        "pc01time_interaction_m"))
-
-
                                                                           
 # bic_df to csv
 write.csv(bic_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/pc_bic_df.csv'),row.names=FALSE)
+write.csv(bic_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/pc_bic_df.csv'),row.names=FALSE)
+
 
 # pc_alt_v_null_df to csv 
 write.csv(pc_alt_v_null_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/pc_BF_df.csv'), row.names=FALSE)
+write.csv(pc_alt_v_null_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/pc_BF_df.csv'),row.names=FALSE)
 
 
 calc_posterior_prob_mult_h <- function(source_model_prior_pred_prob, all_models_prior_pred_prob){
@@ -424,6 +413,7 @@ posterior_prob_null_df <- data.frame(posterior_prob_null=matrix(unlist(posterior
 
 # posterior_prob_null_df to csv
 write.csv(posterior_prob_null_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/pc_postprob_null_m.csv'),row.names=FALSE)
+write.csv(posterior_prob_null_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/pc_postprob_null_m.csv'),row.names=FALSE)
 
 # calc posterior prob of each model P(M|D)
 n_models = ncol(pc_models)-1
@@ -462,20 +452,8 @@ all_models_posterior_prob_df <- data.frame(posterior_prob=matrix(unlist(posterio
                                      subj_id=factor(matrix(unlist(subj_id), nrow=24, byrow=T)), model=factor(matrix(unlist(models), nrow=24, byrow=T)), 
                                      stringsAsFactors=FALSE)
 
-fig_dir <- paste0(home, 'Dropbox/loki_0.5/figures/model_comparisons/')
-
-
-
-all_models_posterior_prob_df$model_reordered <- factor(all_models_posterior_prob_df$model, 
-                                                       levels=c("null_m", 
-                                                        "null_pc_interaction_m",
-                                                        "pc0_time_interaction_m", 
-                                                        "pc1_time_interaction_m", 
-                                                        "pc0time_pc1time_interaction_m",
-                                                        "pc01time_interaction_m"))
-
-
 
 # all_models_posterior_prob_df to csv
 write.csv(all_models_posterior_prob_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/pc_postprob_each_m.csv'),row.names=FALSE)
+write.csv(all_models_posterior_prob_df, file=paste0(home, 'Dropbox/loki_0_0.5/aggregated_data/loki_0.5/pc_postprob_each_m.csv'),row.names=FALSE)
 
