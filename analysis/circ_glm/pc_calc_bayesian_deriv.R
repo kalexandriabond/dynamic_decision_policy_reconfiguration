@@ -479,38 +479,3 @@ all_models_posterior_prob_df$model_reordered <- factor(all_models_posterior_prob
 # all_models_posterior_prob_df to csv
 write.csv(all_models_posterior_prob_df, file=paste0(home, 'Dropbox/loki_0.5/analysis/aggregated_data/pc_postprob_each_m.csv'),row.names=FALSE)
 
-
-
-ggplot(all_models_posterior_prob_df, aes(model, posterior_prob, fill=subj_id)) + geom_bar( position = "dodge", stat = "identity") + 
-  ylab('p(M|D)') +   geom_hline(yintercept=c(0.50, 0.75, 0.95, 0.99), color='darkgray', linetype="dashed")  + theme_minimal(base_size = 16) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
-  
-  scale_x_discrete(labels = c(
-    parse(text=TeX('$\\theta\\sim t$')),
-    parse(text=TeX('$\\theta \\sim  t + p1 + p2$')),
-    parse(text=TeX('$\\theta\\sim  t + p1 + t \\cdot p1$')),
-    parse(text=TeX('$\\theta\\sim  t + p2 + t \\cdot p2$')),
-    parse(text=TeX('$\\theta\\sim  t + p1 + p2 + t \\cdot p1 + t \\cdot p2$')),
-    parse(text=TeX('$\\theta\\sim  t + p1 + p2 + t \\cdot p1\\cdot p2$')))) +
-  
-  scale_fill_brewer(palette="Dark2") +  labs(fill="subject") 
-ggsave(paste0(fig_dir, 'sub_pc_models_postprob.png'))
-
-
-
-ggplot(all_models_posterior_prob_df, aes(model, posterior_prob)) + geom_bar(stat = "summary", fun = mean) + 
-  stat_summary(fun.data=mean_cl_boot, geom="errorbar",position=position_dodge(width=0.85), width=0.1, fun.args=list(conf.int=.95)) +
-  ylab('p(M|D)') +   geom_hline(yintercept=c(0.50, 0.75, 0.95, 0.99), color='darkgray', linetype="dashed")  + theme_minimal(base_size = 16) + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-
-scale_x_discrete(labels = c(
-  parse(text=TeX('$\\theta\\sim t$')),
-  parse(text=TeX('$\\theta \\sim  t + p1 + p2$')),
-  parse(text=TeX('$\\theta\\sim  t + p1 + t \\cdot p1$')),
-  parse(text=TeX('$\\theta\\sim  t + p2 + t \\cdot p2$')),
-  parse(text=TeX('$\\theta\\sim  t + p1 + p2 + t \\cdot p1 + t \\cdot p2$')),
-  parse(text=TeX('$\\theta\\sim  t + p1 + p2 + t \\cdot p1\\cdot p2$')))) +
-  
-
-scale_fill_brewer(palette="Dark2") +  labs(fill="subject") 
-ggsave(paste0(fig_dir, 'mean_pc_models_postprob.png'))
