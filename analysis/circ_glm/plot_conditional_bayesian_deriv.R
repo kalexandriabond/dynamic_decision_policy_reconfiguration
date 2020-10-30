@@ -52,15 +52,16 @@ ggplot(cond_alt_v_null_df, aes(comparison, BF)) + geom_bar(stat = "summary", fun
   ylab('BF10') + xlab('model') +
   scale_fill_brewer(palette="Dark2") 
 
-ggsave(paste0(fig_dir, 'mean_cond_abs_null_models_BF10_raw_labels.png'))
+# ggsave(paste0(fig_dir, 'mean_cond_abs_null_models_BF10_raw_labels.png'))
 
 # evidence for absolute null (BF01)
 ggplot(cond_alt_v_null_df, aes(comparison, BF_alt)) + geom_bar(stat = "summary", fun = mean) + 
   stat_summary(fun.data=mean_cl_boot, geom="errorbar",position=position_dodge(width=0.85), width=0.1, fun.args=list(conf.int=.95))  + scale_y_log10() +  
   theme_minimal(base_size = 20) + 
-  scale_x_discrete(limits = alt_v_abs_null_model_comparison_order) + 
+  # scale_x_discrete(limits = alt_v_abs_null_model_comparison_order) + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 5)) +
-  geom_hline(yintercept=1)  + ggtitle('Absolute null v. conditional models') + 
+  geom_hline(yintercept=1)  + 
+  # ggtitle('Absolute null v. conditional models') + 
   ylab('BF01') + xlab('model') +
   scale_fill_brewer(palette="Dark2") 
 
@@ -89,7 +90,7 @@ ggplot(cond_alt_v_time_null_df, aes(comparison, BF)) + geom_bar(stat = "summary"
   ylab('BF10') + xlab('model') +
   scale_fill_brewer(palette="Dark2")
 
-ggsave(paste0(fig_dir, 'mean_cond_time_null_models_BF10_raw_labels.png'))
+# ggsave(paste0(fig_dir, 'mean_cond_time_null_models_BF10_raw_labels.png'))
 
 # evidence for time null (BF01)
 ggplot(cond_alt_v_time_null_df, aes(comparison, BF_alt)) + 
@@ -98,7 +99,8 @@ geom_bar(stat = "summary", fun = mean ) + # error summarized in next fn with mea
   theme_minimal(base_size = 20) + 
   scale_x_discrete(limits = alt_v_time_null_model_comparison_order) + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size=5)) +
-  geom_hline(yintercept=1)  + ggtitle('Time null v. conditional models') + 
+  geom_hline(yintercept=1)  + 
+  # ggtitle('Time null v. conditional models') + 
   ylab('BF01') + xlab('model') +
   scale_fill_brewer(palette="Dark2") 
 
