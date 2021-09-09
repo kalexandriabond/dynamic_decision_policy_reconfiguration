@@ -1,3 +1,6 @@
+# written by KAMB circa 8/2020
+
+
 # setwd('~/Dropbox/loki_0.5/analysis/circ_glm/')
 
 
